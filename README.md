@@ -1,5 +1,6 @@
 # ./completions
 apt --	bash completion script for apt (not apt-get/apt-cache)
+
 sst --	host(=profile) name auto completion script for sst
 	modify "picard janeway kirk sisko jonathan" as your's
 
