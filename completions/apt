@@ -1,0 +1,42 @@
+# Debian apt completion                             -*- shell-script -*-
+
+_apt()
+{
+    local cur prev words cword
+    _init_completion || return
+
+    local special i
+    for (( i=0; i < ${#words[@]}-1; i++ )); do
+        if [[ ${words[i]} == @(install|list|search|show|update|remove|upgrade|full-upgrade|edit-sources) ]]; then
+            special=${words[i]}
+        fi
+    done
+
+    if [[ -n $special ]]; then
+        case $special in
+            remove)
+                if [[ -f /etc/debian_version ]]; then
+                    # Debian system
+                    COMPREPLY=( $( \
+                        _xfunc dpkg _comp_dpkg_installed_packages $cur ) )
+                else
+                    # assume RPM based
+                    _xfunc rpm _rpm_installed_packages
+                fi
+                return 0dddd
+                ;;
+            *)
+                COMPREPLY=( $( apt-cache --no-generate pkgnames "$cur" \
+                    2> /dev/null ) )
+                return 0
+                ;;
+        esac
+    fi
+
+    COMPREPLY=( $( compgen -W 'install list search show update remove upgrade full-upgrade edit-sources' -- "$cur" ) )
+
+    return 0
+} &&
+complete -F _apt apt
+
+# ex: ts=4 sw=4 et filetype=sh
