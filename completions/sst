@@ -1,0 +1,12 @@
+# sst
+
+_sst()
+{
+  local cur prev words cword
+  _init_completion || return
+
+  COMPREPLY=( $(compgen -W 'picard janeway kirk sisko jonathan' -- "$cur" ) )
+}
+complete -F _sst sst
+
+# ex: ts=4 sw=4 et filetype=sh

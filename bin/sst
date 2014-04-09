@@ -1,0 +1,8 @@
+#!/bin/sh
+default=myaccount
+
+if [ "$#" -eq 1 ]; then
+	gnome-terminal --window-with-profile=$1 -x ssh $1 -l $default 2> /dev/null
+else
+        gnome-terminal --window-with-profile=unknown -x ssh $1 -l $2 2> /dev/null
+fi
