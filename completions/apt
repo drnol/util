@@ -23,7 +23,7 @@ _apt()
                     # assume RPM based
                     _xfunc rpm _rpm_installed_packages
                 fi
-                return 0dddd
+                return 0
                 ;;
             *)
                 COMPREPLY=( $( apt-cache --no-generate pkgnames "$cur" \
