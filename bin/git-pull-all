@@ -1,0 +1,2 @@
+echo GIT PULL ALL SUB-DIRECTORIES
+for d in `ls --directory */`; do cd "$d"; echo + git pull: "$d"; git pull; cd .. ; done
